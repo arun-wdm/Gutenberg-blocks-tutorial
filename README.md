@@ -150,3 +150,20 @@ export default function save( { attributes } ) {
 
 
 ### Dynamic block
+
+To make this block dynamic we need add a callback function while registering the block, so modify the register_block_type like this:
+```
+function create_block_gutenpride_block_init() {
+	register_block_type( __DIR__ . '/build', array(
+		'render_callback' => 'wdm_render_callback',
+	) );
+}
+add_action( 'init', 'create_block_gutenpride_block_init' );
+
+function wdm_render_callback($block_attributes, $content){
+	return "Helllo world";
+}
+```
+
+So the above function gives the complete power to control the frontend side of the block uing PHP.
+Refer: https://developer.wordpress.org/block-editor/how-to-guides/block-tutorial/creating-dynamic-blocks/
